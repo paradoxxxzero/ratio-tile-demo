@@ -21,13 +21,18 @@ class Canvas {
   }
 }
 
+const screenRatioText = document.getElementById('screen-ratio')
+const tileRatioText = document.getElementById('tile-ratio')
 const canvas = new Canvas()
+screenRatioText.textContent = (canvas.w / canvas.h).toPrecision(6)
 addEventListener('resize', () => {
   canvas.size()
+  screenRatioText.textContent = (canvas.w / canvas.h).toPrecision(6)
   requestAnimationFrame(draw)
 })
 
 const tile = new RatioTile(canvas)
+tileRatioText.textContent = tile.ratio.toPrecision(6)
 
 addEventListener('keydown', ({ key }) => {
   if (key === 'ArrowUp') {
@@ -35,6 +40,7 @@ addEventListener('keydown', ({ key }) => {
   } else if (key === 'ArrowDown') {
     tile.downRatio()
   }
+  tileRatioText.textContent = tile.ratio.toPrecision(6)
   tile.render()
 })
 
